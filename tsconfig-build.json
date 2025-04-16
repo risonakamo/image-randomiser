@@ -1,0 +1,23 @@
+{
+    "compilerOptions":{
+        "strict":true,
+        "outDir":"build",
+        "target":"ESNext",
+        "lib":["ESNext","DOM"],
+        "module":"commonjs",
+        "esModuleInterop":true,
+        "baseUrl":".",
+        "paths":{
+            "@/*":["app/*"]
+        }
+    },
+    "include":[
+        "app/**/*.d.ts",
+        "app/**/*.ts",
+        // "tests/**/*.ts",
+    ],
+    "exclude":[
+        "node_modules",
+        "abrenamer-v2-web",
+    ]
+}
