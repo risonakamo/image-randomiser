@@ -1,0 +1,22 @@
+{
+  "name": "image-randomiser-web",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "b": "vite build -w false",
+    "w": "vite build -w true",
+    "check": "svelte-check --threshold error"
+  },
+  "dependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "rollup": "^4.40.0",
+    "sass": "^1.86.3",
+    "svelte": "^5.28.1",
+    "svelte-check": "^4.1.6",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.2",
+    "vite-plugin-checker": "^0.9.1",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

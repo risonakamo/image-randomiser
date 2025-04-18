@@ -16,7 +16,7 @@ function main()
             }
         });
 
-        window.loadFile("test.html");
+        window.loadFile("image-randomiser-web/build/session-viewer.html");
     });
 }
 

@@ -1,0 +1,40 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions":{
+        // -- ts compiler settings
+        "strict":true,
+        "noEmit":true,
+        // "importHelpers":true,
+
+        // -- lib settings
+        "lib":["dom","ESNext"],
+        "target":"ESNext",
+        "types": ["vite/client","svelte"],
+
+        // -- module/import settings
+        "esModuleInterop":false,
+        "moduleResolution":"node",
+        "module":"ESNext",
+        "resolveJsonModule":true,
+        "isolatedModules":true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck":false,
+
+        // -- pathing
+        "baseUrl":".",
+        "paths":{
+            "@/*":["web/*"]
+        }
+    },
+
+    "include":[
+        "web/**/*.d.ts",
+        "web/**/*.ts",
+        "web/**/*.tsx",
+        "web/**/*.svelte"
+    ],
+
+    "exclude":[
+        "node_modules"
+    ]
+}
