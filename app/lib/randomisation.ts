@@ -35,7 +35,7 @@ export function findRandomableItems(targetPath:string):RandomItem[]
 }
 
 /** create session from target folder paths */
-export function createSession(folders:string[],title:string):RandomisationSession
+export function createSession(folders:string[],title:string|null):RandomisationSession
 {
     const items:RandomItem[]=_.flatMap(folders,(folder:string):RandomItem[]=>{
         return findRandomableItems(folder);
@@ -47,6 +47,11 @@ export function createSession(folders:string[],title:string):RandomisationSessio
             path:folder,
         }
     });
+
+    if (!title)
+    {
+        title=generateSessionName(dirItems);
+    }
 
     const now:number=new Date().getTime();
 
@@ -61,4 +66,14 @@ export function createSession(folders:string[],title:string):RandomisationSessio
         originDirs:dirItems,
         items:_.shuffle(items),
     };
+}
+
+/** generate a name for a set of randomable folders. currently does nothing about duplicates
+ *  because might want to know if have 2 of something. but if starts to happen often, should
+ *  do something about that */
+function generateSessionName(folders:RandomableFolder[]):string
+{
+    return _.map(folders,(folder:RandomableFolder):string=>{
+        return folder.title;
+    }).join(", ");
 }

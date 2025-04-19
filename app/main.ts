@@ -1,5 +1,7 @@
-import {app,BrowserWindow,screen} from "electron";
+import {app,BrowserWindow,ipcMain,screen} from "electron";
 import {join} from "path";
+
+import {createSession} from "./lib/randomisation";
 
 function main()
 {
@@ -17,6 +19,21 @@ function main()
         });
 
         window.loadFile("image-randomiser-web/build/session-viewer.html");
+    });
+
+
+    // --- apis
+    // return a session for testing
+    ipcMain.handle("get-test-session",():RandomisationSession=>{
+        const session:RandomisationSession=createSession(
+            [
+                "C:/Users/ktkm/Desktop/draw/ref/imgs",
+                "C:/Users/ktkm/Desktop/h/cg",
+            ],
+            "test session",
+        );
+
+        return session;
     });
 }
 
