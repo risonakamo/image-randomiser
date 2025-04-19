@@ -5,12 +5,18 @@
   "scripts": {
     "b": "tsc --project tsconfig-build.json",
     "r": "electron .",
-    "d": "pnpm b && pnpm r"
+    "d": "pnpm b && pnpm r",
+    "test": "vitest run"
   },
   "main": "./build/main.js",
   "packageManager": "pnpm@10.6.4",
   "dependencies": {
+    "@types/lodash": "^4.17.16",
+    "@types/normalize-path": "^3.0.2",
     "electron": "^35.2.0",
+    "glob": "^11.0.1",
+    "lodash": "^4.17.21",
+    "normalize-path": "^3.0.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.1"
   },
