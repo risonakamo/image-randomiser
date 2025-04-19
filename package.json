@@ -10,8 +10,13 @@
   "main": "./build/main.js",
   "packageManager": "pnpm@10.6.4",
   "dependencies": {
-    "electron": "^35.1.5",
+    "electron": "^35.2.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron"
+    ]
   }
 }
