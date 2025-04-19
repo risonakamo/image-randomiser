@@ -1,0 +1,3 @@
+[submodule "image-randomiser-web"]
+	path = image-randomiser-web
+	url = https://github.com/risonakamo/image-randomiser-web.git
