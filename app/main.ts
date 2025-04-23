@@ -29,6 +29,7 @@ function main()
             [
                 "C:/Users/ktkm/Desktop/draw/ref/imgs",
                 "C:/Users/ktkm/Desktop/h/cg",
+                "C:/Users/ngokn1/Pictures",
             ],
             "test session",
         );
