@@ -9,11 +9,12 @@
     "test": "vitest run"
   },
   "main": "./build/main.js",
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.9.0",
   "dependencies": {
     "@types/lodash": "^4.17.16",
     "@types/normalize-path": "^3.0.2",
     "electron": "^35.2.0",
+    "execa": "^9.5.2",
     "glob": "^11.0.1",
     "lodash": "^4.17.21",
     "normalize-path": "^3.0.0",
