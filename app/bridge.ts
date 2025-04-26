@@ -12,6 +12,11 @@ const bridge:Bridge={
     {
         return ipcRenderer.invoke("launch-item",item,program);
     },
+
+    getPrograms():Promise<string[]>
+    {
+        return ipcRenderer.invoke("get-programs");
+    }
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

@@ -1,8 +1,9 @@
 import {app,BrowserWindow,ipcMain,IpcMainInvokeEvent,screen} from "electron";
 import {join} from "path";
+import _ from "lodash";
 
 import {createSession} from "./lib/randomisation";
-import {runWithProgram} from "./lib/launch";
+import {Programs, runWithProgram} from "./lib/launch";
 
 function main()
 {
@@ -44,6 +45,13 @@ function main()
             runWithProgram(item,program);
         },
     );
+
+    // get list of available launch program names
+    ipcMain.handle("get-programs",():string[]=>{
+        return _.map(Programs,(program:LaunchProgram):string=>{
+            return program.name;
+        });
+    });
 }
 
 main();

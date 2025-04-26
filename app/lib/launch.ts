@@ -4,11 +4,15 @@ import {execa,Options} from "execa";
 import _ from "lodash";
 
 /** set of launchable programs */
-const Programs:LaunchProgram[]=[
+export const Programs:LaunchProgram[]=[
     {
         name:"Chrome",
         path:"chrome",
-    }
+    },
+    {
+        name:"Irfanview",
+        path:"C:/Program Files/irfanView/i_view64.exe",
+    },
 ];
 
 /** programs by name */
@@ -25,6 +29,8 @@ export function runWithProgram(item:string,programName:string):void
         console.error(ProgramsDict);
         throw "failed to find program";
     }
+
+    console.log("launching",ProgramsDict[programName].path);
 
     execa(ProgramsDict[programName].path,[item],{
         detached:true,
