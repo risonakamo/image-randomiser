@@ -22,6 +22,7 @@ export function runWithProgram(item:string,programName:string):void
     if (!(programName in ProgramsDict))
     {
         console.error("failed to find program in programs dict:",programName);
+        console.error(ProgramsDict);
         throw "failed to find program";
     }
 
