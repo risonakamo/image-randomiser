@@ -2,4 +2,5 @@
 interface Bridge
 {
     getTestSession():Promise<RandomisationSession>
+    launchItem(item:string,program:string):Promise<void>
 }

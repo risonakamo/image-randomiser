@@ -1,7 +1,8 @@
-import {app,BrowserWindow,ipcMain,screen} from "electron";
+import {app,BrowserWindow,ipcMain,IpcMainInvokeEvent,screen} from "electron";
 import {join} from "path";
 
 import {createSession} from "./lib/randomisation";
+import {runWithProgram} from "./lib/launch";
 
 function main()
 {
@@ -36,6 +37,13 @@ function main()
 
         return session;
     });
+
+    // launch item with program
+    ipcMain.handle("launch-item",
+        (e:IpcMainInvokeEvent,item:string,program:string):void=>{
+            runWithProgram(item,program);
+        },
+    );
 }
 
 main();
