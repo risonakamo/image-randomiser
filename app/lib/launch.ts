@@ -13,6 +13,10 @@ export const Programs:LaunchProgram[]=[
         name:"Irfanview",
         path:"C:/Program Files/irfanView/i_view64.exe",
     },
+    {
+        name:"CSP",
+        path:"C:/Program Files/CELSYS/CLIP STUDIO 1.5/CLIP STUDIO PAINT/CLIPStudioPaint.exe",
+    }
 ];
 
 /** programs by name */
