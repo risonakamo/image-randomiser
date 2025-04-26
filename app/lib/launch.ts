@@ -32,8 +32,17 @@ export function runWithProgram(item:string,programName:string):void
 
     console.log("launching",ProgramsDict[programName].path);
 
-    execa(ProgramsDict[programName].path,[item],{
-        detached:true,
-        stdio:"ignore",
-    } satisfies Options);
+    try
+    {
+        execa(ProgramsDict[programName].path,[item],{
+            detached:true,
+            stdio:"ignore",
+            windowsHide:false,
+        } satisfies Options);
+    }
+
+    catch (err)
+    {
+        console.error(err);
+    }
 }
