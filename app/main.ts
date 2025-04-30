@@ -1,6 +1,7 @@
 import {app,BrowserWindow,ipcMain,IpcMainInvokeEvent,screen} from "electron";
 import {join} from "path";
 import _ from "lodash";
+import {statSync} from "fs";
 
 import {createSession} from "./lib/randomisation";
 import {Programs, runWithProgram} from "./lib/launch";
@@ -52,6 +53,17 @@ function main()
             return program.name;
         });
     });
+
+    // given strings, filter to the ones that are dirs
+    ipcMain.handle("filter-dirs",
+        (e:IpcMainInvokeEvent,paths:string[]):string[]=>{
+            const dirsOnly:string[]=_.filter(paths,(aPath:string):boolean=>{
+                return statSync(aPath).isDirectory();
+            });
+
+            return dirsOnly;
+        }
+    );
 }
 
 main();
