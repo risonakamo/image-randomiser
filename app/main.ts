@@ -17,7 +17,7 @@ function main()
             minWidth:900,
             minHeight:620,
             webPreferences:{
-                preload:join(__dirname,"bridge.js"),
+                preload:join(__dirname,"bridge/bridge.js"),
             }
         });
 
