@@ -1,11 +1,22 @@
 {
     "compilerOptions":{
+        // typecheck options
         "strict":true,
-        "outDir":"build",
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noEmitOnError": true,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noPropertyAccessFromIndexSignature": true,
+
+        // build options
         "target":"ESNext",
-        "lib":["ESNext","DOM"],
         "module":"commonjs",
+        "lib":["ESNext","DOM"],
         "esModuleInterop":true,
+
+        // paths options
+        "outDir":"build",
         "baseUrl":".",
         "paths":{
             "@/*":["app/*"]
