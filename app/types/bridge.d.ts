@@ -5,4 +5,6 @@ interface Bridge
     launchItem(item:string,program:string):Promise<void>
     getPrograms():Promise<string[]>
     absPathDirs(files:File[]):Promise<string[]>
+    newSession(folders:string[],title:string):Promise<void>
+    getSessions():Promise<RandomisationSession[]>
 }

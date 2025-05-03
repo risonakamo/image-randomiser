@@ -19,8 +19,7 @@ const bridge:Bridge={
     },
 
     /** get absolute path of a file objs (ie from drop). also filters to only the paths
-     *  that are dirs
-     */
+     *  that are dirs. code is here instead of main because only works in renderer */
     absPathDirs(files:File[]):Promise<string[]>
     {
         const paths:string[]=files.map((file:File):string=>{
@@ -28,6 +27,16 @@ const bridge:Bridge={
         });
 
         return ipcRenderer.invoke("filter-dirs",paths);
+    },
+
+    newSession(folders:string[],title:string):Promise<void>
+    {
+        return ipcRenderer.invoke("new-session",folders,title);
+    },
+
+    getSessions():Promise<RandomisationSession[]>
+    {
+        return ipcRenderer.invoke("get-sessions");
     }
 };
 

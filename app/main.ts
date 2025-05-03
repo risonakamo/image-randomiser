@@ -5,6 +5,7 @@ import {statSync} from "fs";
 
 import {createSession} from "./lib/randomisation";
 import {Programs, runWithProgram} from "./lib/launch";
+import {addSession, getSessions} from "./lib/storage";
 
 function main()
 {
@@ -64,6 +65,20 @@ function main()
             return dirsOnly;
         }
     );
+
+    // create a new session, add to storage
+    ipcMain.handle("new-session",
+        (e:IpcMainInvokeEvent,folders:string[],title:string)=>{
+            const session:RandomisationSession=createSession(folders,title);
+
+            addSession(session);
+        },
+    );
+
+    // get the sessions from storage
+    ipcMain.handle("get-sessions",():RandomisationSession[]=>{
+        return getSessions();
+    });
 }
 
 main();

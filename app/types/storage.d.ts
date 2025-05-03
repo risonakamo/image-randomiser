@@ -1,0 +1,4 @@
+interface ImageRandomiserStore
+{
+    sessions:RandomisationSession[]
+}
