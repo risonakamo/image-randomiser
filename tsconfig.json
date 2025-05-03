@@ -1,15 +1,27 @@
 {
     "compilerOptions":{
+        // typecheck options
         "strict":true,
-        "outDir":"build",
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noEmitOnError": true,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noPropertyAccessFromIndexSignature": true,
+
+        // module compiler options
+        "module":"NodeNext",
         "target":"ESNext",
+        "moduleResolution": "nodenext",
         "lib":["ESNext","DOM"],
-        "module":"commonjs",
         "esModuleInterop":true,
+
+        // path options
         "baseUrl":".",
+        "outDir":"build",
         "paths":{
             "@/*":["app/*"]
-        }
+        },
     },
     "include":[
         "app/**/*.d.ts",

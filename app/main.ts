@@ -1,13 +1,16 @@
 import {app,BrowserWindow,ipcMain,IpcMainInvokeEvent,screen} from "electron";
-import {join} from "path";
+import {join,dirname} from "path";
 import _ from "lodash";
 import {statSync} from "fs";
+import {fileURLToPath} from "url";
 
-import {createSession} from "./lib/randomisation";
-import {Programs, runWithProgram} from "./lib/launch";
+import {createSession} from "./lib/randomisation.js";
+import {Programs, runWithProgram} from "./lib/launch.js";
 
 function main()
 {
+    const here:string=dirname(fileURLToPath(import.meta.url));
+
     app.on("ready",()=>{
         const display:Electron.Size=screen.getPrimaryDisplay().workAreaSize;
 
@@ -17,7 +20,7 @@ function main()
             minWidth:900,
             minHeight:620,
             webPreferences:{
-                preload:join(__dirname,"bridge.js"),
+                preload:join(here,"bridge.js"),
             }
         });
 
