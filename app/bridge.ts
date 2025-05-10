@@ -37,7 +37,17 @@ const bridge:Bridge={
     getSessions():Promise<RandomisationSession[]>
     {
         return ipcRenderer.invoke("get-sessions");
-    }
+    },
+
+    deleteSession(deleteId:string):Promise<RandomisationSession[]>
+    {
+        return ipcRenderer.invoke("delete-session",deleteId);
+    },
+
+    duplicateSession(duplicateId:string,title:string):Promise<RandomisationSession[]>
+    {
+        return ipcRenderer.invoke("duplicate-session",duplicateId,title);
+    },
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

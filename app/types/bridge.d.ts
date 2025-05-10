@@ -7,4 +7,6 @@ interface Bridge
     absPathDirs(files:File[]):Promise<string[]>
     newSession(folders:string[],title:string):Promise<void>
     getSessions():Promise<RandomisationSession[]>
+    deleteSession(deleteId:string):Promise<RandomisationSession[]>
+    duplicateSession(duplicateId:string,title:string):Promise<RandomisationSession[]>
 }
