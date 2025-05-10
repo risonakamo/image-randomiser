@@ -22,7 +22,7 @@ function main()
             }
         });
 
-        window.loadFile("image-randomiser-web/build/session-create.html");
+        window.loadFile("image-randomiser-web/build/session-select.html");
     });
 
 
