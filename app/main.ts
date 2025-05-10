@@ -5,7 +5,7 @@ import {statSync} from "fs";
 
 import {createSession} from "./lib/randomisation";
 import {Programs, runWithProgram} from "./lib/launch";
-import {addSession, getSessions} from "./lib/storage";
+import {addSession, deleteSession, duplicateSessionInStore, getSessions} from "./lib/storage";
 
 function main()
 {
@@ -68,7 +68,7 @@ function main()
 
     // create a new session, add to storage
     ipcMain.handle("new-session",
-        (e:IpcMainInvokeEvent,folders:string[],title:string)=>{
+        (e:IpcMainInvokeEvent,folders:string[],title:string):void=>{
             const session:RandomisationSession=createSession(folders,title);
 
             addSession(session);
@@ -79,6 +79,20 @@ function main()
     ipcMain.handle("get-sessions",():RandomisationSession[]=>{
         return getSessions();
     });
+
+    // delete a session. returns the new session list
+    ipcMain.handle("delete-session",
+        (e:IpcMainInvokeEvent,deleteId:string):RandomisationSession[]=>{
+            return deleteSession(deleteId);
+        }
+    );
+
+    // duplicate session. returns the new session list
+    ipcMain.handle("duplicate-session",
+        (e:IpcMainInvokeEvent,duplicateId:string,title:string):RandomisationSession[]=>{
+            return duplicateSessionInStore(duplicateId,title);
+        }
+    );
 }
 
 main();

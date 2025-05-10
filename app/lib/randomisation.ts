@@ -77,3 +77,18 @@ function generateSessionName(folders:RandomableFolder[]):string
         return folder.title;
     }).join(", ");
 }
+
+/** duplicate randomisation session with new title. all items are re-randomised
+ *  and read from the origin dirs, so might have different items */
+export function duplicateSession(
+    session:RandomisationSession,
+    title:string,
+):RandomisationSession
+{
+    return createSession(
+        _.map(session.originDirs,(dir:RandomableFolder):string=>{
+            return dir.path;
+        }),
+        title,
+    );
+}
