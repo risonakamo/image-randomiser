@@ -3,7 +3,7 @@ import {join} from "path";
 import _ from "lodash";
 import {statSync} from "fs";
 
-import {createSession} from "./lib/randomisation";
+import {createSession, getItemCount} from "./lib/randomisation";
 import {Programs, runWithProgram} from "./lib/launch";
 import {addSession, deleteSession, duplicateSessionInStore, getSessions} from "./lib/storage";
 
@@ -91,6 +91,13 @@ function main()
     ipcMain.handle("duplicate-session",
         (e:IpcMainInvokeEvent,duplicateId:string,title:string):RandomisationSession[]=>{
             return duplicateSessionInStore(duplicateId,title);
+        }
+    );
+
+    // get number of items in the target dirs
+    ipcMain.handle("get-items-count",
+        (e:IpcMainInvokeEvent,folders:string[]):number=>{
+            return getItemCount(folders);
         }
     );
 }

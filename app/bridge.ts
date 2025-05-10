@@ -48,6 +48,11 @@ const bridge:Bridge={
     {
         return ipcRenderer.invoke("duplicate-session",duplicateId,title);
     },
+
+    getItemCount(folders:string[]):Promise<number>
+    {
+        return ipcRenderer.invoke("get-items-count",folders);
+    },
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

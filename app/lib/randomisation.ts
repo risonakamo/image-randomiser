@@ -92,3 +92,14 @@ export function duplicateSession(
         title,
     );
 }
+
+/** given list of folders, get the number of items if were to make a session from
+ *  those folders */
+export function getItemCount(folders:string[]):number
+{
+    const items:RandomItem[]=_.flatMap(folders,(folder:string):RandomItem[]=>{
+        return findRandomableItems(folder);
+    });
+
+    return items.length;
+}
