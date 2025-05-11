@@ -62,6 +62,26 @@ export function duplicateSessionInStore(id:string,title:string):RandomisationSes
     return addSession(newSession);
 }
 
+/** try to get a single session by id */
+export function getSession(id:string):RandomisationSession|undefined
+{
+    const store:ImageRandomiserStore=readStore();
+
+    const foundSession:RandomisationSession|undefined=_.find(
+        store.sessions,
+        (session:RandomisationSession):boolean=>{
+            return session.id==id;
+        },
+    );
+
+    if (!foundSession)
+    {
+        console.warn("failed to find session:",id);
+    }
+
+    return foundSession;
+}
+
 /** read from data store */
 function readStore():ImageRandomiserStore
 {

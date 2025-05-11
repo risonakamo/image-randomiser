@@ -5,7 +5,8 @@ import {statSync} from "fs";
 
 import {createSession, getItemCount} from "./lib/randomisation";
 import {Programs, runWithProgram} from "./lib/launch";
-import {addSession, deleteSession, duplicateSessionInStore, getSessions} from "./lib/storage";
+import {addSession, deleteSession, duplicateSessionInStore,
+    getSession, getSessions} from "./lib/storage";
 
 function main()
 {
@@ -98,6 +99,13 @@ function main()
     ipcMain.handle("get-items-count",
         (e:IpcMainInvokeEvent,folders:string[]):number=>{
             return getItemCount(folders);
+        }
+    );
+
+    // get a single session
+    ipcMain.handle("get-session",
+        (e:IpcMainInvokeEvent,sessionId:string):RandomisationSession|undefined=>{
+            return getSession(sessionId);
         }
     );
 }
