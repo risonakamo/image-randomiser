@@ -53,6 +53,11 @@ const bridge:Bridge={
     {
         return ipcRenderer.invoke("get-items-count",folders);
     },
+
+    getSession(sessionId:string):Promise<RandomisationSession|undefined>
+    {
+        return ipcRenderer.invoke("get-session",sessionId);
+    },
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

@@ -10,4 +10,5 @@ interface Bridge
     deleteSession(deleteId:string):Promise<RandomisationSession[]>
     duplicateSession(duplicateId:string,title:string):Promise<RandomisationSession[]>
     getItemCount(folders:string[]):Promise<number>
+    getSession(sessionId:string):Promise<RandomisationSession|undefined>
 }
