@@ -4,7 +4,7 @@ import _ from "lodash";
 import {statSync} from "fs";
 
 import {createSession, getItemCount} from "./lib/randomisation";
-import {Programs, runWithProgram} from "./lib/launch";
+import {openFileExplorerTo, Programs, runWithProgram} from "./lib/launch";
 import {addSession, deleteSession, duplicateSessionInStore,
     getSession, getSessions} from "./lib/storage";
 
@@ -106,6 +106,13 @@ function main()
     ipcMain.handle("get-session",
         (e:IpcMainInvokeEvent,sessionId:string):RandomisationSession|undefined=>{
             return getSession(sessionId);
+        }
+    );
+
+    // open file explorer to the target path
+    ipcMain.handle("open-file-explorer",
+        (e:IpcMainInvokeEvent,item:string):void=>{
+            openFileExplorerTo(item);
         }
     );
 }

@@ -58,6 +58,11 @@ const bridge:Bridge={
     {
         return ipcRenderer.invoke("get-session",sessionId);
     },
+
+    openFileExplorer(item:string):Promise<void>
+    {
+        return ipcRenderer.invoke("open-file-explorer",item);
+    },
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

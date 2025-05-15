@@ -2,6 +2,7 @@
 
 import {execa,Options} from "execa";
 import _ from "lodash";
+import {dirname} from "path";
 
 /** set of launchable programs */
 export const Programs:LaunchProgram[]=[
@@ -39,6 +40,24 @@ export function runWithProgram(item:string,programName:string):void
     try
     {
         execa(ProgramsDict[programName].path,[item],{
+            detached:true,
+            stdio:"ignore",
+            windowsHide:false,
+        } satisfies Options);
+    }
+
+    catch (err)
+    {
+        console.error(err);
+    }
+}
+
+/** launch explorer to open the parent folder of the target item */
+export function openFileExplorerTo(item:string):void
+{
+    try
+    {
+        execa("explorer",[dirname(item)],{
             detached:true,
             stdio:"ignore",
             windowsHide:false,
