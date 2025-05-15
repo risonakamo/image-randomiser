@@ -4,7 +4,11 @@ import _ from "lodash";
 
 import {duplicateSession} from "./randomisation";
 
-const StorePath:string=join(__dirname,"data","data.json");
+// for release:
+// const StorePath:string=join(__dirname,"data","data.json");
+
+// for dev:
+const StorePath:string=join(__dirname,"..","data","data.json");
 
 /** add session to store */
 export function addSession(session:RandomisationSession):RandomisationSession[]
