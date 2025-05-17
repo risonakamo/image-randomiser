@@ -12,4 +12,5 @@ interface Bridge
     getItemCount(folders:string[]):Promise<number>
     getSession(sessionId:string):Promise<RandomisationSession|undefined>
     openFileExplorer(item:string):Promise<void>
+    updateSessionPosition(sessionId:string,newPosition:number):Promise<void>
 }

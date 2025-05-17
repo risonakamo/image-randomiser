@@ -86,6 +86,30 @@ export function getSession(id:string):RandomisationSession|undefined
     return foundSession;
 }
 
+/** update a session's position in storage. also updates the last update date */
+export function updateSession(sessionId:string,newPosition:number):void
+{
+    const store:ImageRandomiserStore=readStore();
+
+    const foundSessIndex:number=_.findIndex(
+        store.sessions,
+        (session:RandomisationSession):boolean=>{
+            return session.id==sessionId;
+        },
+    );
+
+    if (foundSessIndex<0)
+    {
+        console.error("could not update session: failed to find");
+        return;
+    }
+
+    store.sessions[foundSessIndex].position=newPosition;
+    store.sessions[foundSessIndex].lastUpdateDate=new Date().getTime();
+
+    writeStore(store);
+}
+
 /** read from data store */
 function readStore():ImageRandomiserStore
 {

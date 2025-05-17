@@ -6,7 +6,7 @@ import {statSync} from "fs";
 import {createSession, getItemCount} from "./lib/randomisation";
 import {openFileExplorerTo, Programs, runWithProgram} from "./lib/launch";
 import {addSession, deleteSession, duplicateSessionInStore,
-    getSession, getSessions} from "./lib/storage";
+    getSession, getSessions, updateSession} from "./lib/storage";
 
 function main()
 {
@@ -114,6 +114,12 @@ function main()
         (e:IpcMainInvokeEvent,item:string):void=>{
             openFileExplorerTo(item);
         }
+    );
+
+    ipcMain.handle("update-session-position",
+        (e:IpcMainInvokeEvent,sessionId:string,newPosition:number):void=>{
+            updateSession(sessionId,newPosition);
+        },
     );
 }
 
