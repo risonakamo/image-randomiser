@@ -17,6 +17,8 @@ export function addSession(session:RandomisationSession):RandomisationSession[]
 
     store.sessions.push(session);
 
+    addRememberedFolders(store,session.originDirs);
+
     writeStore(store);
 
     return store.sessions;
@@ -110,6 +112,49 @@ export function updateSession(sessionId:string,newPosition:number):void
     writeStore(store);
 }
 
+/** get list of remembered folders from storage. sorted by last used date */
+export function getRememberedFolders():RememberedFolder[]
+{
+    const store:ImageRandomiserStore=readStore();
+    return _.sortBy(Object.values(store.rememberedFolders),
+    (folder:RememberedFolder):number=>{
+        return folder.lastUseDate;
+    });
+}
+
+/** add list of remembered folders to a store's remembered folders field.
+ *  mutates the store */
+function addRememberedFolders(
+    store:ImageRandomiserStore,
+    folders:RandomableFolder[],
+):ImageRandomiserStore
+{
+    for (var folderI=0;folderI<folders.length;folderI++)
+    {
+        const folder:RandomableFolder=folders[folderI];
+
+        // already remembered. update the entry
+        if (folder.path in store.rememberedFolders)
+        {
+            store.rememberedFolders[folder.path].itemsCount=folder.itemsCount;
+            store.rememberedFolders[folder.path].timesUsed+=1;
+            store.rememberedFolders[folder.path].lastUseDate=new Date().getTime();
+        }
+
+        // otherwise, add the entry
+        else
+        {
+            store.rememberedFolders[folder.path]={
+                ...folder,
+                timesUsed:1,
+                lastUseDate:new Date().getTime(),
+            };
+        }
+    }
+
+    return store;
+}
+
 /** read from data store */
 function readStore():ImageRandomiserStore
 {
@@ -117,6 +162,7 @@ function readStore():ImageRandomiserStore
     {
         return {
             sessions:[],
+            rememberedFolders:{},
         };
     }
 

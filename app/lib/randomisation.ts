@@ -37,15 +37,18 @@ export function findRandomableItems(targetPath:string):RandomItem[]
 /** create session from target folder paths */
 export function createSession(folders:string[],title:string|null):RandomisationSession
 {
-    const items:RandomItem[]=_.flatMap(folders,(folder:string):RandomItem[]=>{
-        return findRandomableItems(folder);
-    });
+    var items:RandomItem[]=[];
 
     const dirItems:RandomableFolder[]=_.map(folders,(folder:string):RandomableFolder=>{
+        const itemsForDir:RandomItem[]=findRandomableItems(folder);
+
+        items=_.concat(items,itemsForDir);
+
         return {
             title:basename(folder),
             path:folder,
-        }
+            itemsCount:itemsForDir.length,
+        };
     });
 
     if (!title)

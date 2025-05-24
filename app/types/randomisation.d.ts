@@ -25,6 +25,8 @@ interface RandomableFolder
 
     // filepath of the folder. also works as unique id
     path:string
+
+    itemsCount:number
 }
 
 /** a randomable item */
