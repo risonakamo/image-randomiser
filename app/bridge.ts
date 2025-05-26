@@ -67,7 +67,12 @@ const bridge:Bridge={
     updateSessionPosition(sessionId:string,newPosition:number):Promise<void>
     {
         return ipcRenderer.invoke("update-session-position",sessionId,newPosition);
-    }
+    },
+
+    getRememberedFolders():Promise<RememberedFolder[]>
+    {
+        return ipcRenderer.invoke("get-remembered-folders");
+    },
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

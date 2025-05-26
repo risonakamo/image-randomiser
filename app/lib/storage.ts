@@ -10,6 +10,12 @@ import {duplicateSession} from "./randomisation";
 // for dev:
 const StorePath:string=join(__dirname,"..","data","data.json");
 
+/** empty store state */
+const defaultStore:ImageRandomiserStore={
+    sessions:[],
+    rememberedFolders:{},
+};
+
 /** add session to store */
 export function addSession(session:RandomisationSession):RandomisationSession[]
 {
@@ -160,10 +166,7 @@ function readStore():ImageRandomiserStore
 {
     if (!existsSync(StorePath))
     {
-        return {
-            sessions:[],
-            rememberedFolders:{},
-        };
+        return _.cloneDeep(defaultStore);
     }
 
     const rawData:string=readFileSync(StorePath,"utf-8");
@@ -181,4 +184,10 @@ function writeStore(store:ImageRandomiserStore):void
 
     const jsonData:string=JSON.stringify(store);
     writeFileSync(StorePath,jsonData,"utf-8");
+}
+
+/** reset the store to initial state */
+export function resetStore():void
+{
+    writeStore(_.cloneDeep(defaultStore));
 }

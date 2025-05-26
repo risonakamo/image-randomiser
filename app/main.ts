@@ -6,11 +6,14 @@ import {statSync} from "fs";
 import {createSession, getItemCount} from "./lib/randomisation";
 import {openFileExplorerTo, Programs, runWithProgram} from "./lib/launch";
 import {addSession, deleteSession, duplicateSessionInStore,
-    getSession, getSessions, updateSession} from "./lib/storage";
+    getRememberedFolders, getSession, getSessions, resetStore,
+    updateSession} from "./lib/storage";
 
 function main()
 {
     app.on("ready",()=>{
+        // resetStore();
+
         const display:Electron.Size=screen.getPrimaryDisplay().workAreaSize;
 
         const window=new BrowserWindow({
@@ -116,11 +119,17 @@ function main()
         }
     );
 
+    // update a session's details
     ipcMain.handle("update-session-position",
         (e:IpcMainInvokeEvent,sessionId:string,newPosition:number):void=>{
             updateSession(sessionId,newPosition);
         },
     );
+
+    // get current remembered folders
+    ipcMain.handle("get-remembered-folders",():RememberedFolder[]=>{
+        return getRememberedFolders();
+    });
 }
 
 main();
