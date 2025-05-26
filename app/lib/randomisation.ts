@@ -76,9 +76,12 @@ export function createSession(folders:string[],title:string|null):RandomisationS
  *  do something about that */
 function generateSessionName(folders:RandomableFolder[]):string
 {
-    return _.map(folders,(folder:RandomableFolder):string=>{
-        return folder.title;
-    }).join(", ");
+    return _(folders)
+        .map((folder:RandomableFolder):string=>{
+            return folder.title;
+        })
+        .uniq()
+        .join(", ");
 }
 
 /** duplicate randomisation session with new title. all items are re-randomised
