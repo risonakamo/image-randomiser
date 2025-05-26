@@ -122,14 +122,14 @@ export function updateSession(sessionId:string,newPosition:number):void
 export function getRememberedFolders():RememberedFolder[]
 {
     const store:ImageRandomiserStore=readStore();
-    return _.sortBy(Object.values(store.rememberedFolders),
+    return _.reverse(_.sortBy(Object.values(store.rememberedFolders),
     (folder:RememberedFolder):number=>{
         return folder.lastUseDate;
-    });
+    }));
 }
 
 /** add list of remembered folders to a store's remembered folders field.
- *  mutates the store */
+ *  mutates the store. skips folders with 0 items */
 function addRememberedFolders(
     store:ImageRandomiserStore,
     folders:RandomableFolder[],
@@ -138,6 +138,11 @@ function addRememberedFolders(
     for (var folderI=0;folderI<folders.length;folderI++)
     {
         const folder:RandomableFolder=folders[folderI];
+
+        if (folder.itemsCount==0)
+        {
+            continue;
+        }
 
         // already remembered. update the entry
         if (folder.path in store.rememberedFolders)
