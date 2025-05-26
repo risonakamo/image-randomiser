@@ -100,7 +100,7 @@ function main()
 
     // get number of items in the target dirs
     ipcMain.handle("get-items-count",
-        (e:IpcMainInvokeEvent,folders:string[]):number=>{
+        (e:IpcMainInvokeEvent,folders:string[]):ItemCounts=>{
             return getItemCount(folders);
         }
     );

@@ -49,7 +49,7 @@ const bridge:Bridge={
         return ipcRenderer.invoke("duplicate-session",duplicateId,title);
     },
 
-    getItemCount(folders:string[]):Promise<number>
+    getItemCount(folders:string[]):Promise<ItemCounts>
     {
         return ipcRenderer.invoke("get-items-count",folders);
     },

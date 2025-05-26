@@ -101,11 +101,23 @@ export function duplicateSession(
 
 /** given list of folders, get the number of items if were to make a session from
  *  those folders */
-export function getItemCount(folders:string[]):number
+export function getItemCount(folders:string[]):ItemCounts
 {
-    const items:RandomItem[]=_.flatMap(folders,(folder:string):RandomItem[]=>{
-        return findRandomableItems(folder);
-    });
+    const counts:ItemCountsDict={};
+    var total:number=0;
 
-    return items.length;
+    for (var folderI=0;folderI<folders.length;folderI++)
+    {
+        const folder:string=folders[folderI];
+
+        const itemsAmount:number=findRandomableItems(folder).length;
+
+        counts[folder]=itemsAmount;
+        total+=itemsAmount;
+    }
+
+    return {
+        individualCounts:counts,
+        total,
+    };
 }

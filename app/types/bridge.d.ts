@@ -9,7 +9,7 @@ interface Bridge
     getSessions():Promise<RandomisationSession[]>
     deleteSession(deleteId:string):Promise<RandomisationSession[]>
     duplicateSession(duplicateId:string,title:string):Promise<RandomisationSession[]>
-    getItemCount(folders:string[]):Promise<number>
+    getItemCount(folders:string[]):Promise<ItemCounts>
     getSession(sessionId:string):Promise<RandomisationSession|undefined>
     openFileExplorer(item:string):Promise<void>
     updateSessionPosition(sessionId:string,newPosition:number):Promise<void>

@@ -1,5 +1,10 @@
 // types dealing with randomisation
 
+/** individual counts of folders in item counts result
+ *  key: path of folder
+ *  val: items in that folder */
+type ItemCountsDict=Record<string,number>
+
 /** random session */
 interface RandomisationSession
 {
@@ -37,4 +42,11 @@ interface RandomItem
 
     // parent folder
     parent:string
+}
+
+/** result of items count */
+interface ItemCounts
+{
+    individualCounts:ItemCountsDict
+    total:number
 }
