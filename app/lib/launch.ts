@@ -11,12 +11,12 @@ export const Programs:LaunchProgram[]=[
         path:"C:/Program Files/irfanView/i_view64.exe",
     },
     {
-        name:"Chrome",
-        path:"chrome",
-    },
-    {
         name:"CSP",
         path:"C:/Program Files/CELSYS/CLIP STUDIO 1.5/CLIP STUDIO PAINT/CLIPStudioPaint.exe",
+    },
+    {
+        name:"Chrome",
+        path:"chrome",
     },
 ];
 

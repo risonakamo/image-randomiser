@@ -9,10 +9,15 @@ import {duplicateSession} from "./randomisation";
 
 // for dev:
 const StorePath:string=join(__dirname,"..","data","data.json");
+const StorePath2:string=join(__dirname,"..","data","data2.json");
 
 /** empty store state */
 const defaultStore:ImageRandomiserStore={
     sessions:[],
+};
+
+/** empty store state 2 */
+const defaultStore2:ImageRandomiserStore2={
     rememberedFolders:{},
 };
 
@@ -20,12 +25,14 @@ const defaultStore:ImageRandomiserStore={
 export function addSession(session:RandomisationSession):RandomisationSession[]
 {
     const store:ImageRandomiserStore=readStore();
+    const store2:ImageRandomiserStore2=readStore2();
 
     store.sessions.push(session);
 
-    addRememberedFolders(store,session.originDirs);
+    addRememberedFolders(store2,session.originDirs);
 
     writeStore(store);
+    writeStore2(store2);
 
     return store.sessions;
 }
@@ -121,7 +128,7 @@ export function updateSession(sessionId:string,newPosition:number):void
 /** get list of remembered folders from storage. sorted by last used date */
 export function getRememberedFolders():RememberedFolder[]
 {
-    const store:ImageRandomiserStore=readStore();
+    const store:ImageRandomiserStore2=readStore2();
     return _.reverse(_.sortBy(Object.values(store.rememberedFolders),
     (folder:RememberedFolder):number=>{
         return folder.lastUseDate;
@@ -131,9 +138,9 @@ export function getRememberedFolders():RememberedFolder[]
 /** add list of remembered folders to a store's remembered folders field.
  *  mutates the store. skips folders with 0 items */
 function addRememberedFolders(
-    store:ImageRandomiserStore,
+    store:ImageRandomiserStore2,
     folders:RandomableFolder[],
-):ImageRandomiserStore
+):ImageRandomiserStore2
 {
     for (var folderI=0;folderI<folders.length;folderI++)
     {
@@ -178,6 +185,18 @@ function readStore():ImageRandomiserStore
     return JSON.parse(rawData);
 }
 
+/** read from data store 2 */
+function readStore2():ImageRandomiserStore2
+{
+    if (!existsSync(StorePath2))
+    {
+        return _.cloneDeep(defaultStore2);
+    }
+
+    const rawData:string=readFileSync(StorePath2,"utf-8");
+    return JSON.parse(rawData);
+}
+
 /** override the store with new data */
 function writeStore(store:ImageRandomiserStore):void
 {
@@ -191,8 +210,22 @@ function writeStore(store:ImageRandomiserStore):void
     writeFileSync(StorePath,jsonData,"utf-8");
 }
 
-/** reset the store to initial state */
+/** override the store with new data */
+function writeStore2(store:ImageRandomiserStore2):void
+{
+    mkdirSync(
+        dirname(StorePath2),{
+            recursive:true,
+        }
+    );
+
+    const jsonData:string=JSON.stringify(store);
+    writeFileSync(StorePath2,jsonData,"utf-8");
+}
+
+/** reset both stores to initial state */
 export function resetStore():void
 {
     writeStore(_.cloneDeep(defaultStore));
+    writeStore2(_.cloneDeep(defaultStore2));
 }

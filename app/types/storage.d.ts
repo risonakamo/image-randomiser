@@ -2,10 +2,15 @@
  *  can only be remembered once */
 type RememberedFoldersDict=Record<string,RememberedFolder>
 
+/** 1st store which can get large due to sessions */
 interface ImageRandomiserStore
 {
     sessions:RandomisationSession[]
+}
 
+/** 2nd store for things things other than sessions */
+interface ImageRandomiserStore2
+{
     // list of remembered folders. sorted by last use date
     rememberedFolders:RememberedFoldersDict
 }
