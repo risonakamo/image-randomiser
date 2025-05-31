@@ -73,6 +73,11 @@ const bridge:Bridge={
     {
         return ipcRenderer.invoke("get-remembered-folders");
     },
+
+    resetStore():Promise<void>
+    {
+        return ipcRenderer.invoke("reset-store");
+    }
 };
 
 contextBridge.exposeInMainWorld("electron",bridge);

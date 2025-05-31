@@ -130,6 +130,11 @@ function main()
     ipcMain.handle("get-remembered-folders",():RememberedFolder[]=>{
         return getRememberedFolders();
     });
+
+    // reset the store
+    ipcMain.handle("reset-store",():void=>{
+        resetStore();
+    });
 }
 
 main();

@@ -5,6 +5,7 @@
   "scripts": {
     "d": "electron-vite",
     "r": "electron .",
+    "check": "tsc --noEmit",
     "test": "vitest run"
   },
   "main": "./build/main.js",

@@ -29,7 +29,6 @@ export function findRandomableItems(targetPath:string):RandomItem[]
     return _.map(foundItems,(item:string):RandomItem=>{
         return {
             path:item,
-            parent:dirname(item),
         };
     });
 }

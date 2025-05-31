@@ -39,9 +39,6 @@ interface RandomItem
 {
     // filepath to the item. also a unique id
     path:string
-
-    // parent folder
-    parent:string
 }
 
 /** result of items count */

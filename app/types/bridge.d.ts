@@ -14,4 +14,5 @@ interface Bridge
     openFileExplorer(item:string):Promise<void>
     updateSessionPosition(sessionId:string,newPosition:number):Promise<void>
     getRememberedFolders():Promise<RememberedFolder[]>
+    resetStore():Promise<void>
 }
