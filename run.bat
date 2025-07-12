@@ -1,2 +1,2 @@
-cd %dp~0
+cd %~dp0
 pnpm r
