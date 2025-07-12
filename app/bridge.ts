@@ -20,7 +20,7 @@ const bridge:Bridge={
 
     /** get absolute path of a file objs (ie from drop). also filters to only the paths
      *  that are dirs. code is here instead of main because only works in renderer */
-    absPathDirs(files:File[]):Promise<string[]>
+    absPathDirs(files:File[]):Promise<DirItem[]>
     {
         const paths:string[]=files.map((file:File):string=>{
             return webUtils.getPathForFile(file);

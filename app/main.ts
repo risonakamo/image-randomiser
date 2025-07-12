@@ -1,5 +1,5 @@
 import {app,BrowserWindow,ipcMain,IpcMainInvokeEvent,screen} from "electron";
-import {join} from "path";
+import {join,basename} from "path";
 import _ from "lodash";
 import {statSync} from "fs";
 
@@ -61,13 +61,18 @@ function main()
 
     // given strings, filter to the ones that are dirs
     ipcMain.handle("filter-dirs",
-        (e:IpcMainInvokeEvent,paths:string[]):string[]=>{
+        (e:IpcMainInvokeEvent,paths:string[]):DirItem[]=>{
             const dirsOnly:string[]=_.filter(paths,(aPath:string):boolean=>{
                 return statSync(aPath).isDirectory();
             });
 
-            return dirsOnly;
-        }
+            return _.map(dirsOnly,(dirPath:string):DirItem=>{
+                return {
+                    path:dirPath,
+                    name:basename(dirPath),
+                };
+            });
+        },
     );
 
     // create a new session, add to storage
