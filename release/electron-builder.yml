@@ -1,0 +1,13 @@
+appId: imagerandom
+productName: image-randomiser
+artifactName: out.zip
+
+win:
+  target: zip
+
+files:
+  - build/**/*
+  - image-randomiser-web/build/**/*
+
+extraFiles:
+  - version.md
