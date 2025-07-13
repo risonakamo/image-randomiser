@@ -4,12 +4,8 @@ import _ from "lodash";
 
 import {duplicateSession} from "./randomisation";
 
-// for release:
-// const StorePath:string=join(__dirname,"data","data.json");
-
-// for dev:
-const StorePath:string=join(__dirname,"..","data","data.json");
-const StorePath2:string=join(__dirname,"..","data","data2.json");
+const StorePath:string=getStorePath();
+const StorePath2:string=getStorePath2();
 
 /** empty store state */
 const defaultStore:ImageRandomiserStore={
@@ -228,4 +224,16 @@ export function resetStore():void
 {
     writeStore(_.cloneDeep(defaultStore));
     writeStore2(_.cloneDeep(defaultStore2));
+}
+
+/** get the store path based on the build mode */
+function getStorePath():string
+{
+    return join(__dirname,"..","data","data.json");
+}
+
+/** get the store2 path based on the build mode */
+function getStorePath2():string
+{
+    return join(__dirname,"..","data","data2.json");
 }
