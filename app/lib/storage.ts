@@ -197,8 +197,6 @@ function readStore2():ImageRandomiserStore2
 /** override the store with new data */
 function writeStore(store:ImageRandomiserStore):void
 {
-    console.log("trying to make at",dirname(StorePath));
-
     mkdirSync(
         dirname(StorePath),{
             recursive:true,
@@ -234,7 +232,7 @@ function getStorePath():string
 {
     if (import.meta.env.VITE_PROD=="true")
     {
-        return join(dirname(app.getAppPath()),"data","data.json");
+        return join(dirname(app.getPath("exe")),"data","data.json");
     }
 
     else
@@ -248,7 +246,7 @@ function getStorePath2():string
 {
     if (import.meta.env.VITE_PROD=="true")
     {
-        return join(dirname(app.getAppPath()),"data","data2.json");
+        return join(dirname(app.getPath("exe")),"data","data2.json");
     }
 
     else
