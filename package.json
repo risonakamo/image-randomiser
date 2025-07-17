@@ -2,9 +2,11 @@
   "name": "image-randomiser",
   "version": "1.0.0",
   "description": "image randomiser",
+  "author": "risonakamo",
+  "repository": "https://github.com/risonakamo/image-randomiser",
   "scripts": {
-    "b":"electron-vite build",
-    "b-prod":"electron-vite build --mode prod",
+    "b": "electron-vite build",
+    "b-prod": "electron-vite build --mode prod",
     "d": "electron-vite",
     "r": "electron .",
     "check": "tsc --noEmit",
@@ -29,7 +31,13 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "electron"
+      "electron",
+      "electron-winstaller",
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "electron-winstaller",
+      "esbuild"
     ]
   }
 }

@@ -4,7 +4,7 @@ cd $HERE
 
 cd ..
 rm -rf build
-pnpm b
+pnpm b-prod
 
 cd image-randomiser-web
 rm -rf build

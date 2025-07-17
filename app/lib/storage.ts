@@ -1,6 +1,7 @@
 import {join,dirname} from "path";
 import {existsSync,readFileSync,mkdirSync,writeFileSync} from "fs";
 import _ from "lodash";
+import {app} from "electron";
 
 import {duplicateSession} from "./randomisation";
 
@@ -196,6 +197,8 @@ function readStore2():ImageRandomiserStore2
 /** override the store with new data */
 function writeStore(store:ImageRandomiserStore):void
 {
+    console.log("trying to make at",dirname(StorePath));
+
     mkdirSync(
         dirname(StorePath),{
             recursive:true,
@@ -229,11 +232,9 @@ export function resetStore():void
 /** get the store path based on the build mode */
 function getStorePath():string
 {
-    console.log("meta",import.meta.env);
-
     if (import.meta.env.VITE_PROD=="true")
     {
-        return join(__dirname,"data","data.json");
+        return join(dirname(app.getAppPath()),"data","data.json");
     }
 
     else
@@ -245,5 +246,13 @@ function getStorePath():string
 /** get the store2 path based on the build mode */
 function getStorePath2():string
 {
-    return join(__dirname,"..","data","data2.json");
+    if (import.meta.env.VITE_PROD=="true")
+    {
+        return join(dirname(app.getAppPath()),"data","data2.json");
+    }
+
+    else
+    {
+        return join(__dirname,"..","data","data2.json");
+    }
 }
