@@ -4,6 +4,7 @@
   "description": "image randomiser",
   "scripts": {
     "b":"electron-vite build",
+    "b-prod":"electron-vite build --mode prod",
     "d": "electron-vite",
     "r": "electron .",
     "check": "tsc --noEmit",

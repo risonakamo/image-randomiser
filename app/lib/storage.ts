@@ -229,7 +229,17 @@ export function resetStore():void
 /** get the store path based on the build mode */
 function getStorePath():string
 {
-    return join(__dirname,"..","data","data.json");
+    console.log("meta",import.meta.env);
+
+    if (import.meta.env.VITE_PROD=="true")
+    {
+        return join(__dirname,"data","data.json");
+    }
+
+    else
+    {
+        return join(__dirname,"..","data","data.json");
+    }
 }
 
 /** get the store2 path based on the build mode */

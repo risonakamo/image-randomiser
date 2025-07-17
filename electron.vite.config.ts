@@ -6,8 +6,9 @@ export default {
             outDir:"build",
             lib:{
                 entry:"app/main.ts",
-            }
-        }
+            },
+        },
+        envDir:"envs",
     },
     preload:{
         build:{
